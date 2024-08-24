@@ -1,24 +1,24 @@
-import React from "react";
-import Home from "./pages/home/Home";
+import React, { useContext } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-import Register from "./pages/register/Register";
-import Login from "./pages/login/Login";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import NotilyContext from "./components/context/Context";
+import Home from "./pages/home/Home";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
 
 axios.defaults.withCredentials = true;
 
 const App = () => {
-  const { user } = useSelector((store) => store.user);
+  const { user } = useContext(NotilyContext);
 
   return (
     <Routes>
-      <Route path="/" element={!user ? <Navigate to="/login" /> : <Home />} />
+      <Route path="/" element={!user ? <Navigate to="/signin" /> : <Home />} />
       <Route
-        path="/register"
+        path="/signup"
         element={user ? <Navigate to="/" /> : <Register />}
       />
-      <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
+      <Route path="/signin" element={user ? <Navigate to="/" /> : <Login />} />
     </Routes>
   );
 };

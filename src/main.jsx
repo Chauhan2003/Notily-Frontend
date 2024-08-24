@@ -3,22 +3,21 @@ import { createRoot } from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
-import { Provider } from "react-redux";
-import store from "./redux/store.jsx";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import NotilyContextProvider from "./components/context/ContextProvider.jsx";
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
-    <Provider store={store}>
+    <NotilyContextProvider>
       <App />
-    </Provider>
+    </NotilyContextProvider>
     <ToastContainer
       position="top-center"
       autoClose={3000}
       hideProgressBar
       newestOnTop
-      closeOnClick
+      closeOnClick={false}
       rtl={false}
       pauseOnFocusLoss
       pauseOnHover
